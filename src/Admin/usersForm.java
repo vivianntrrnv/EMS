@@ -248,8 +248,10 @@ public class usersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_p_addMouseExited
 
     private void p_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseClicked
-        createUserForm crf= new createUserForm();
+       createUserForm crf= new createUserForm();
         crf.setVisible(true);
+         crf.remove.setEnabled(false);
+          crf.select.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_p_addMouseClicked
 
@@ -273,9 +275,20 @@ public class usersForm extends javax.swing.JFrame {
             crf.ps.setText(""+rs.getString("u_password"));
             crf.ut.setSelectedItem(""+rs.getString("u_type"));
             crf.us.setSelectedItem(""+rs.getString("u_status"));
+            crf.image.setIcon(crf.ResizeImage(rs.getString("u_image"), null, crf.image));
+            crf.oldpath= rs.getString("u_image");
+            crf.path= rs.getString("u_image");
             crf.add.setEnabled(false);
             crf.update.setEnabled(true);
             crf.setVisible(true);
+            
+            if(rs.getString("u_image").isEmpty()){
+             crf.select.setEnabled(true);  
+             crf.remove.setEnabled(false);
+            }else{
+             crf.select.setEnabled(false);  
+             crf.remove.setEnabled(true);
+            }
             this.dispose();
             }
         }catch(SQLException ex){
