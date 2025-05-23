@@ -341,8 +341,6 @@ public class createUserForm extends javax.swing.JFrame {
             }
         });
 
-        ps.setEnabled(false);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -567,6 +565,11 @@ public class createUserForm extends javax.swing.JFrame {
                     + "VALUES('"+fn.getText()+"','"+ln.getText()+"','"+email.getText()+"','"+un.getText()+"','"+ps.getText()+"','"+ut.getSelectedItem()+"','"+us.getSelectedItem()+"','"+destination+"')"))
                 {
                     try{
+                        if (selectedFile == null || destination == null || destination.isEmpty()) {
+                         JOptionPane.showMessageDialog(null, "Please select an image before submitting.");
+                        return;
+                        }
+                        
                 Files.copy(selectedFile.toPath(), new File(destination).toPath(),StandardCopyOption.REPLACE_EXISTING);
                 JOptionPane.showMessageDialog(null,"Inserted Successfully!");
                 usersForm uf= new usersForm();
@@ -644,7 +647,11 @@ public class createUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-        // TODO add your handling code here:
+        createUserForm crf= new createUserForm();
+        crf.setVisible(true);
+         crf.remove.setEnabled(false);
+          crf.select.setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_refreshActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed

@@ -32,10 +32,11 @@ public class loginForm extends javax.swing.JFrame {
     static String type;
     
     
-    public static boolean loginAcc(String username, String password){
+     public static boolean loginAcc(String username, String password){
         dbConnector connector= new dbConnector();
         
-         try {
+        
+        try {
             String query= "SELECT*FROM tbl_user WHERE u_username='"+username+"'";
             ResultSet resultSet= connector.getData(query);
             if(resultSet.next())
@@ -66,8 +67,10 @@ public class loginForm extends javax.swing.JFrame {
             
             }catch (SQLException | NoSuchAlgorithmException ex){
                     return false;
-                  }
-        }
+                    }
+        
+    
+    }
         
         
     
@@ -278,8 +281,7 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
-         if(loginAcc(user.getText(),pass.getText())){
+     if(loginAcc(user.getText(),pass.getText())){
              if (!status.equals("Active")){
              JOptionPane.showMessageDialog(null,"In-Active Account, Contact the Admin!");
              }else{
@@ -299,6 +301,7 @@ public class loginForm extends javax.swing.JFrame {
      }else{
             JOptionPane.showMessageDialog(null,"Login Failed!");
         }
+    
                                   
     }//GEN-LAST:event_jButton1ActionPerformed
 
