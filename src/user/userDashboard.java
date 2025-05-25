@@ -47,6 +47,9 @@ public class userDashboard extends javax.swing.JFrame {
         account = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        account1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -104,9 +107,9 @@ public class userDashboard extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/account_circle_24dp_FAFAD2_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 130));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 100));
 
-        acc_name.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        acc_name.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         acc_name.setForeground(new java.awt.Color(250, 250, 210));
         acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_name.setText("USER");
@@ -115,7 +118,7 @@ public class userDashboard extends javax.swing.JFrame {
                 acc_nameMouseClicked(evt);
             }
         });
-        jPanel3.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 70, -1));
+        jPanel3.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 70, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 48, 210, 460));
 
@@ -152,7 +155,42 @@ public class userDashboard extends javax.swing.JFrame {
         account.add(jLabel4);
         jLabel4.setBounds(30, 100, 100, 21);
 
-        jPanel1.add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 160, 150));
+        jPanel1.add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 160, 150));
+
+        account1.setBackground(new java.awt.Color(250, 250, 210));
+        account1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                account1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                account1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                account1MouseExited(evt);
+            }
+        });
+        account1.setLayout(null);
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(37, 61, 44));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-events-90.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        account1.add(jLabel8);
+        jLabel8.setBounds(30, 20, 100, 80);
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(37, 61, 44));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("BOOK EVENTS");
+        account1.add(jLabel5);
+        jLabel5.setBounds(30, 100, 110, 21);
+
+        jPanel1.add(account1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 170, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,6 +251,24 @@ public class userDashboard extends javax.swing.JFrame {
         account.setBackground(navcolor);
     }//GEN-LAST:event_accountMouseExited
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void account1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_account1MouseClicked
+       bookingForm bf= new bookingForm();
+       bf.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_account1MouseClicked
+
+    private void account1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_account1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_account1MouseEntered
+
+    private void account1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_account1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_account1MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -251,13 +307,14 @@ public class userDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_name;
     private javax.swing.JPanel account;
+    private javax.swing.JPanel account1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

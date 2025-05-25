@@ -36,12 +36,13 @@ public class accountDetails extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         iddisplay = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         acc_fname = new javax.swing.JLabel();
         acc_lname = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         ln = new javax.swing.JTextField();
         fn = new javax.swing.JTextField();
@@ -72,19 +73,19 @@ public class accountDetails extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(250, 250, 210));
         jLabel1.setText("USER DASHBOARD");
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(250, 250, 210));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Log Out");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
         iddisplay.setFont(new java.awt.Font("Century Gothic", 1, 19)); // NOI18N
         iddisplay.setForeground(new java.awt.Color(250, 250, 210));
         iddisplay.setText("(UID)");
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(250, 250, 210));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Back");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,9 +96,9 @@ public class accountDetails extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(48, 48, 48)
                 .addComponent(iddisplay)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 436, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(41, 41, 41))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 473, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +106,8 @@ public class accountDetails extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(iddisplay))
+                    .addComponent(iddisplay)
+                    .addComponent(jLabel10))
                 .addGap(28, 28, 28))
         );
 
@@ -141,6 +142,17 @@ public class accountDetails extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/account_circle_24dp_FAFAD2_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 130));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(250, 250, 210));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Log Out");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 48, 210, 460));
 
@@ -232,6 +244,9 @@ public class accountDetails extends javax.swing.JFrame {
        ln.setText(""+sess.getLname());
        email.setText(""+sess.getEmail());
         un.setText(""+sess.getUsername());
+        ut.setSelectedItem(""+sess.getType());
+        acc_fname.setText(""+sess.getFname());
+            acc_lname.setText(""+sess.getLname());
     }//GEN-LAST:event_formWindowActivated
 
     private void utActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utActionPerformed
@@ -247,6 +262,12 @@ public class accountDetails extends javax.swing.JFrame {
     private void acc_lnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acc_lnameMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_acc_lnameMouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        userDashboard ud= new userDashboard();
+        ud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -291,6 +312,7 @@ public class accountDetails extends javax.swing.JFrame {
     private javax.swing.JTextField fn;
     private javax.swing.JLabel iddisplay;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

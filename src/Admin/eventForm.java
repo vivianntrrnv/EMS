@@ -76,6 +76,8 @@ public class eventForm extends javax.swing.JFrame {
         addlabel1 = new javax.swing.JLabel();
         update = new javax.swing.JPanel();
         addlabel2 = new javax.swing.JLabel();
+        delete = new javax.swing.JPanel();
+        addlabel3 = new javax.swing.JLabel();
         eid = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -180,7 +182,7 @@ public class eventForm extends javax.swing.JFrame {
         print.add(p_edit1);
         p_edit1.setBounds(10, 10, 150, 20);
 
-        jPanel3.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 180, 40));
+        jPanel3.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 180, 40));
 
         p_add.setBackground(new java.awt.Color(37, 61, 44));
         p_add.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 210)));
@@ -215,13 +217,13 @@ public class eventForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(250, 250, 210));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Current User:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 180, 30));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 180, 30));
 
         acc_id.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         acc_id.setForeground(new java.awt.Color(250, 250, 210));
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_id.setText("ID");
-        jPanel3.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 120, 20));
+        jPanel3.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 120, 20));
 
         clear.setBackground(new java.awt.Color(37, 61, 44));
         clear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 210)));
@@ -250,7 +252,7 @@ public class eventForm extends javax.swing.JFrame {
         clear.add(addlabel1);
         addlabel1.setBounds(0, 10, 180, 20);
 
-        jPanel3.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 180, 40));
+        jPanel3.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 180, 40));
 
         update.setBackground(new java.awt.Color(37, 61, 44));
         update.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 210)));
@@ -279,7 +281,36 @@ public class eventForm extends javax.swing.JFrame {
         update.add(addlabel2);
         addlabel2.setBounds(0, 10, 180, 20);
 
-        jPanel3.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 180, 40));
+        jPanel3.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 180, 40));
+
+        delete.setBackground(new java.awt.Color(37, 61, 44));
+        delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 210)));
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
+        });
+        delete.setLayout(null);
+
+        addlabel3.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
+        addlabel3.setForeground(new java.awt.Color(250, 250, 210));
+        addlabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addlabel3.setText("DELETE");
+        addlabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addlabel3MouseClicked(evt);
+            }
+        });
+        delete.add(addlabel3);
+        addlabel3.setBounds(0, 10, 180, 20);
+
+        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 180, 40));
 
         eid.setEnabled(false);
 
@@ -572,16 +603,53 @@ public class eventForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addlabel2MouseClicked
 
     private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-        // TODO add your handling code here:
+        if(eid.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please select a product first!");
+        }else{
+             if(en.getText().isEmpty()|| ep.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"All fields are required!");
+        }else{
+            dbConnector dbc = new dbConnector();
+            dbc.updateData("UPDATE tbl_events SET e_name= '"+en.getText()+"',e_location='"+el.getText()+"',e_capacity='"+ec.getText()+"'"
+                    + ",e_price='"+ep.getText()+"',e_status='"+es.getSelectedItem()+"'"
+                    + " WHERE e_id= '"+eid.getText()+"'");
+                    JOptionPane.showMessageDialog(null,"Updated Successfully!");
+                    displayData();
+                     checkadd= true;
+                   addlabel.setForeground(white);
+                   eid.setText("");
+                   en.setText("");
+                   el.setText("");
+                   ec.setText("");
+                   ep.setText("");
+                   es.setSelectedIndex(0);
+             }
+        }
     }//GEN-LAST:event_updateMouseClicked
 
     private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
-        // TODO add your handling code here:
+        update.setBackground(hovercolor);
     }//GEN-LAST:event_updateMouseEntered
 
     private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
-        // TODO add your handling code here:
+         update.setBackground(navcolor);
     }//GEN-LAST:event_updateMouseExited
+
+    private void addlabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addlabel3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addlabel3MouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+          delete.setBackground(hovercolor);
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+        delete.setBackground(navcolor);
+    }//GEN-LAST:event_deleteMouseExited
 
     /**
      * @param args the command line arguments
@@ -626,7 +694,9 @@ public class eventForm extends javax.swing.JFrame {
     private javax.swing.JLabel addlabel;
     private javax.swing.JLabel addlabel1;
     private javax.swing.JLabel addlabel2;
+    private javax.swing.JLabel addlabel3;
     private javax.swing.JPanel clear;
+    private javax.swing.JPanel delete;
     public javax.swing.JTextField ec;
     public javax.swing.JTextField eid;
     public javax.swing.JTextField el;

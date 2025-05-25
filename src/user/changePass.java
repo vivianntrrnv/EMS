@@ -214,7 +214,8 @@ public class changePass extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
           Session sess =Session.getInstance();
        iddisplay.setText("USER ID:"+sess.getUid());
-       
+             acc_fname.setText(""+sess.getFname());
+            acc_lname.setText(""+sess.getLname());
      
     }//GEN-LAST:event_formWindowActivated
 
