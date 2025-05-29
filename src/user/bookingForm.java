@@ -5,13 +5,19 @@
  */
 package user;
 
+import Admin.activityLogsForm;
 import Admin.adminDashboard;
 import Admin.usersForm;
 import Config.Session;
 import Config.dbConnector;
 import eventm.loginForm;
 import java.awt.Color;
+import static java.awt.Color.white;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 
 /**
  *
@@ -24,10 +30,29 @@ public class bookingForm extends javax.swing.JFrame {
      */
     public bookingForm() {
         initComponents();
+        displayData();
+        
     }
-    
-        Color navcolor = new Color(37,61,44); 
+     Color navcolor = new Color(37,61,44); 
         Color hovercolor = new Color(255,255,153); 
+        boolean checkadd= true;
+   public void displayData() {
+    try {
+        Session sess = Session.getInstance();
+        int userId = sess.getUid();  
+
+        dbConnector dbc = new dbConnector();
+        String query = "SELECT e_id, b_date, b_status FROM tbl_bookings WHERE u_id = " + userId;
+        ResultSet rs = dbc.getData(query);
+
+        bktable.setModel(DbUtils.resultSetToTableModel(rs));
+        rs.close();
+    } catch (SQLException ex) {
+        System.out.println("Error in displayData: " + ex.getMessage());
+    }
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +77,7 @@ public class bookingForm extends javax.swing.JFrame {
         update = new javax.swing.JPanel();
         addlabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        btable = new javax.swing.JTable();
+        bktable = new javax.swing.JTable();
         eid = new javax.swing.JTextField();
         en = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -222,7 +247,7 @@ public class bookingForm extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 48, 170, 460));
 
-        btable.setModel(new javax.swing.table.DefaultTableModel(
+        bktable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -230,12 +255,12 @@ public class bookingForm extends javax.swing.JFrame {
 
             }
         ));
-        btable.addMouseListener(new java.awt.event.MouseAdapter() {
+        bktable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btableMouseClicked(evt);
+                bktableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(btable);
+        jScrollPane1.setViewportView(bktable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 330, 370));
 
@@ -266,7 +291,7 @@ public class bookingForm extends javax.swing.JFrame {
 
         es.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         es.setForeground(new java.awt.Color(37, 61, 44));
-        es.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approved", "Pending" }));
+        es.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Approved" }));
         es.setEnabled(false);
         jPanel1.add(es, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 210, 40));
 
@@ -336,16 +361,19 @@ public class bookingForm extends javax.swing.JFrame {
       
     }//GEN-LAST:event_formWindowActivated
 
-    private void btableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btableMouseClicked
+    private void bktableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bktableMouseClicked
       
-    }//GEN-LAST:event_btableMouseClicked
+    }//GEN-LAST:event_bktableMouseClicked
 
     private void addlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addlabelMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_addlabelMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-      
+           eid.setText("");
+            en.setText("");
+            bdate.setText("");
+            es.setSelectedIndex(0);
     
 
     }//GEN-LAST:event_deleteMouseClicked
@@ -363,20 +391,34 @@ public class bookingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addlabel1MouseClicked
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-      Session sess = Session.getInstance();
-if(eid.getText().isEmpty()|| en.getText().isEmpty()|| bdate.getText().isEmpty()){
-    JOptionPane.showMessageDialog(null,"All fields are required!");
-}else{
-    dbConnector dbc= new dbConnector();
-    {
-      if (dbc.insertData("INSERT INTO tbl_bookings(u_id, e_id, b_date, b_status) VALUES('" 
-        + sess.getUid() + "', '" 
-        + eid.getText() + "', '" 
-        + bdate.getText() + "', '" 
-        + es.getSelectedItem() + "')")) {
-    JOptionPane.showMessageDialog(null, "Event added successfully!");
-}
+     Session sess = Session.getInstance();
+
+if (eid.getText().isEmpty() || en.getText().isEmpty() || bdate.getText().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+} else {
+    dbConnector dbc = new dbConnector();
+    int userId = sess.getUid();
+    String eventId = eid.getText();
+    String bookingDate = bdate.getText();
+    String bookingStatus = es.getSelectedItem().toString();
+
+    
+    String sql = "INSERT INTO tbl_bookings(u_id, e_id, b_date, b_status) VALUES(" 
+                 + userId + ", " 
+                 + eventId + ", '" 
+                 + bookingDate + "', '" 
+                 + bookingStatus + "')";
+
+    if (dbc.insertData(sql)) {
+        JOptionPane.showMessageDialog(null, "Event booked successfully!");
+
+       
+        String action = "User booked an event with ID: " + eventId;
+        activityLogsForm logger = new activityLogsForm();
+        logger.logActivity(action, Integer.parseInt(eventId)); 
     }
+
+
 }
     }//GEN-LAST:event_addMouseClicked
 
@@ -393,7 +435,7 @@ if(eid.getText().isEmpty()|| en.getText().isEmpty()|| bdate.getText().isEmpty())
     }//GEN-LAST:event_addlabel2MouseClicked
 
     private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_updateMouseClicked
 
     private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
@@ -455,7 +497,7 @@ if(eid.getText().isEmpty()|| en.getText().isEmpty()|| bdate.getText().isEmpty())
     private javax.swing.JLabel addlabel1;
     private javax.swing.JLabel addlabel2;
     private javax.swing.JTextField bdate;
-    private javax.swing.JTable btable;
+    private javax.swing.JTable bktable;
     private javax.swing.JPanel delete;
     public javax.swing.JTextField eid;
     public javax.swing.JTextField en;

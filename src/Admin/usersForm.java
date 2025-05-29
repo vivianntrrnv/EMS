@@ -282,6 +282,8 @@ public class usersForm extends javax.swing.JFrame {
          crf.remove.setEnabled(false);
           crf.select.setEnabled(true);
         this.dispose();
+        
+        
     }//GEN-LAST:event_p_addMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
@@ -327,6 +329,7 @@ public class usersForm extends javax.swing.JFrame {
         }       
                 
          TableModel tbl= usertable.getModel();
+         
     }//GEN-LAST:event_editMouseClicked
 
     private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered

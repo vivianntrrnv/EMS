@@ -496,6 +496,7 @@ public class eventForm extends javax.swing.JFrame {
                     dbc.insertData("INSERT INTO tbl_events(e_name, e_price, e_status,e_location,e_capacity,e_image)VALUES('"+en.getText()+"', '"+ep.getText() +"', '"+es.getSelectedItem()+"','"+el.getText()+"','"+ec.getText()+"','')");
                      JOptionPane.showMessageDialog(null,"Successfully Added!");
                      displayData();
+                     
                      checkadd= true;
                    addlabel.setForeground(white);
                    eid.setText("");
@@ -614,7 +615,7 @@ public class eventForm extends javax.swing.JFrame {
                     + ",e_price='"+ep.getText()+"',e_status='"+es.getSelectedItem()+"'"
                     + " WHERE e_id= '"+eid.getText()+"'");
                     JOptionPane.showMessageDialog(null,"Updated Successfully!");
-                    displayData();
+                      displayData();
                      checkadd= true;
                    addlabel.setForeground(white);
                    eid.setText("");
